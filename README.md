@@ -406,3 +406,12 @@ The server uses Socket.IO to push live seat availability updates to connected cl
 | `GET`    | `/api/bookings/:id`                                  | Bearer token | —                                             |
 | `PUT`    | `/api/bookings/:id`                                  | Bearer token | `{passengerList}`                             |
 | `PUT`    | `/api/bookings/:id/cancel`                           | Admin token  | —                                             |
+
+
+## API Testing
+
+Import the Postman collection:
+
+postman/Flight-Booking-API.postman_collection.json
+
+Set the `base_url` and `token` variables before testing.

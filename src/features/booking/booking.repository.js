@@ -1,6 +1,15 @@
 import BookingModel from "./booking.model.js";
 import { FlightModel } from "../flight/flight.repository.js";
 import { ApplicationError } from "../../error-handler/applicationError.js";
+import { io } from "../../../index.js";
+import {
+  sendBookingConfirmation,
+  sendCancellationEmail,
+} from "../../services/email.service.js";
+import mongoose from "mongoose";
+import { userSchema } from "../user/user.schema.js";
+
+const UserModel = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default class BookingRepository {
   async create(data) {
@@ -32,6 +41,9 @@ export default class BookingRepository {
       });
 
       await booking.save();
+      // Send confirmation email (non-blocking)
+      const user = await UserModel.findById(data.userId).select("name email");
+      sendBookingConfirmation({ booking, flight, user });
       return booking;
     } catch (err) {
       throw err;
@@ -114,6 +126,10 @@ export default class BookingRepository {
         processedAt: new Date(),
       };
 
+      // Send cancellation email (non-blocking)
+      const flight = await FlightModel.findById(booking.flight);
+      const user = await UserModel.findById(booking.user).select("name email");
+      sendCancellationEmail({ booking, flight, user, refundDetails });
       return { booking, refundDetails };
     } catch (err) {
       throw err;
