@@ -20,10 +20,10 @@ export default class FlightController {
   // 🔓 PUBLIC — GET /api/flights
   async getAll(req, res, next) {
     try {
-      const flights = await this.flightRepository.getAll(req.query);
-
+      const { flights, total } = await this.flightRepository.getAll(req.query);
       return res.status(200).json({
         success: true,
+        total,
         count: flights.length,
         flights,
       });

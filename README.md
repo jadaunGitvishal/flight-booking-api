@@ -407,7 +407,6 @@ The server uses Socket.IO to push live seat availability updates to connected cl
 | `PUT`    | `/api/bookings/:id`                                  | Bearer token | `{passengerList}`                             |
 | `PUT`    | `/api/bookings/:id/cancel`                           | Admin token  | —                                             |
 
-
 ## API Testing
 
 Import the Postman collection:

@@ -18,12 +18,15 @@ export default class FlightRepository {
         console.log("Validation issue:", err.errors);
         throw err;
       } else {
+        // Handle duplicate key error
+        if (err.code === 11000) {
+          throw new ApplicationError(
+            "Flight number already exists. Please use a different flight number.",
+            400,
+          );
+        }
         console.log(err);
-        throw new ApplicationError(
-          err.message,
-          "Something went wrong with database",
-          500,
-        );
+        throw new ApplicationError("Something went wrong with database", 500);
       }
     }
   }
@@ -32,23 +35,37 @@ export default class FlightRepository {
     try {
       const query = {};
 
+      // Case-insensitive regex filtering
       if (filters.departureCity) {
-        query.departureCity = filters.departureCity;
+        query.departureCity = new RegExp(filters.departureCity, "i");
       }
-
       if (filters.arrivalCity) {
-        query.arrivalCity = filters.arrivalCity;
+        query.arrivalCity = new RegExp(filters.arrivalCity, "i");
       }
-
       if (filters.departureDate) {
         query.departureDate = filters.departureDate;
       }
-
       if (filters.flightClass) {
         query.flightClass = filters.flightClass;
       }
 
-      return await FlightModel.find(query);
+      // Pagination
+      const page = parseInt(filters.page) || 1;
+      const limit = parseInt(filters.limit) || 6;
+      const skip = (page - 1) * limit;
+
+      // Sorting
+      const sortBy = filters.sortBy || "createdAt";
+      const order = filters.order === "desc" ? -1 : 1;
+      const sortObj = { [sortBy]: order };
+
+      // Run both queries together
+      const [flights, total] = await Promise.all([
+        FlightModel.find(query).sort(sortObj).skip(skip).limit(limit),
+        FlightModel.countDocuments(query),
+      ]);
+
+      return { flights, total };
     } catch (err) {
       console.log(err);
       throw new ApplicationError("Something went wrong with database", 500);

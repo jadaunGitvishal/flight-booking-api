@@ -7,513 +7,753 @@
   },
   "item": [
     {
-      "name": "auth-register",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"name\": \"Rohit Sharma\",\r\n  \"email\": \"rohitjadaun014@gmail.com\",\r\n  \"password\": \"rohit@123\",\r\n  \"role\": \"user\",\r\n  \"profilePicture\": \"https://unsplash.com/photos/a-puffin-with-vibrant-beak-and-wings-spread-in-flight-RFtQIL8AwHM\",\r\n  \"createdAt\": \"2026-07-24T10:00:00.000Z\",\r\n  \"gender\": \"male\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3000/api/auth/register",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "register"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "auth-login",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\": \"Kashishsingh@gmail.com\",\r\n  \"password\": \"kashish@123\"\r\n}\r\n\r\n// {\r\n//   \"email\": \"rohitjadaun014@gmail.com\",\r\n//   \"password\": \"rohit@123\"\r\n// }",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3000/api/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "auth-logout",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3MjksImV4cCI6MTc4Mjg5NzMyOX0.HOLdGQVzrsB5tHoGMFCdbbL7w7Kf6qDhWuuCYzA3w-o",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3000/api/auth/logout",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "logout"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "User-GetUser-Details",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3000/api/users/",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "users",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "User-UpdateUser-profile",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "name",
-              "value": "Kashish Singh Jadaun",
-              "type": "text",
-              "uuid": "12cf7b86-c079-46db-99a5-ebe6826acede"
+      "name": "Auth",
+      "item": [
+        {
+          "name": "auth-register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rohit Sharma\",\r\n  \"email\": \"rohitjadaun014@gmail.com\",\r\n  \"password\": \"rohit@123\",\r\n  \"role\": \"user\",\r\n  \"profilePicture\": \"https://i.pravatar.cc/150\",\r\n  \"gender\": \"male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
-            {
-              "key": "gender",
-              "value": "Female",
-              "type": "text",
-              "uuid": "701c1431-75b4-441e-a6ef-d16b2320760a"
-            },
-            {
-              "key": "avatar",
-              "type": "file",
-              "uuid": "6284b9c3-2232-4bff-9586-0db0016d807f",
-              "src": "/C:/Users/Vishal/Downloads/avatar.jpg"
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "register"]
             }
-          ]
-        },
-        "url": {
-          "raw": "http://localhost:3000/api/users/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "users",
-            "profile"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "admin-Create-flight",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
           },
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text",
-            "disabled": true
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "flightNumber",
-              "value": "FGA-23",
-              "type": "text",
-              "uuid": "e25b353f-04f8-4770-bffe-11d5b3cab1fd"
+          "response": []
+        },
+        {
+          "name": "auth-register-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Admin User\",\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"admin@123\",\r\n  \"role\": \"admin\",\r\n  \"profilePicture\": \"https://i.pravatar.cc/150\",\r\n  \"gender\": \"male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
-            {
-              "key": "airline",
-              "value": "Air India",
-              "type": "text",
-              "uuid": "99a93e3d-edb2-46ac-9354-ade46db15951"
-            },
-            {
-              "key": "departureCity",
-              "value": "Pune",
-              "type": "text",
-              "uuid": "9d2da45a-9518-4b24-9f42-21bc6e4c9551"
-            },
-            {
-              "key": "arrivalCity",
-              "value": "Rajishthan",
-              "type": "text",
-              "uuid": "eaf0d4cc-0a6d-4bad-8d52-ccee7eecc104"
-            },
-            {
-              "key": "departureDate",
-              "value": "2026-07-25T10:00:00Z",
-              "type": "text",
-              "uuid": "dd77e2de-470c-4192-864a-a15cbc7e813f"
-            },
-            {
-              "key": "arrivalDate",
-              "value": "2026-07-25T12:00:00Z",
-              "type": "text",
-              "uuid": "9cfdd4d5-18b1-47a4-9c28-e45cf272faa8"
-            },
-            {
-              "key": "price",
-              "value": "22000",
-              "type": "text",
-              "uuid": "2fc6c495-56a0-4547-9d51-1c95b7c05ebd"
-            },
-            {
-              "key": "availableSeats",
-              "value": "3",
-              "type": "text",
-              "uuid": "1845f3a5-b1cb-43a1-88a6-f60833362cc9"
-            },
-            {
-              "key": "flightClass",
-              "value": "Economy",
-              "type": "text",
-              "uuid": "0abb26d9-0874-4fd5-b498-41ec2fe80e5c"
-            },
-            {
-              "key": "image",
-              "type": "file",
-              "uuid": "ede52162-476e-4b2d-9df4-517a17fb4962",
-              "src": "/C:/Users/Vishal/Downloads/avatar.jpg"
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "register"]
             }
-          ]
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:3000/api/flights",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "flights"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "admin-Update-flight-byID",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"flightNumber\": \"FGA-571\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "auth-login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"rohitjadaun014@gmail.com\",\r\n  \"password\": \"rohit@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "login"]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:3000/api/flights/6a44cd7baa31b88d263fb646",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "flights",
-            "6a44cd7baa31b88d263fb646"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "admin-Delete-flight-byID",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3000/api/flights/6a44cd7baa31b88d263fb646",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "flights",
-            "6a44cd7baa31b88d263fb646"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "User-GetAll-flight",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/api/flights",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "flights"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "User-GetFlight-byID",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/api/flights/6a44ce0aaa31b88d263fb647",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "flights",
-            "6a44ce0aaa31b88d263fb647"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "bookings-Create-Booking",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0ZTg2NmE3YThjOGFlYzRiZjk5NmYiLCJlbWFpbCI6InJvaGl0amFkYXVuMDE0QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzgyOTAxMTI0LCJleHAiOjE3ODI5MDQ3MjR9.tacDQKdu2EjdcqY5Ydsuht2KbjUV3n4ODjOe2YPtjgY",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "\r\n{\r\n  \"flightId\": \"6a44ce0aaa31b88d263fb647\",\r\n  \"passengerList\": [\r\n    {\r\n      \"name\": \"Rohit Sharma\",\r\n      \"age\": 21,\r\n      \"gender\": \"Male\"\r\n    }\r\n   \r\n  ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "auth-login-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "login"]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:3000/api/bookings",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "bookings"
-          ]
+        {
+          "name": "auth-logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "auth", "logout"]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "booking-Get-By-ID",
-      "request": {
-        "auth": {
-          "type": "noauth"
+      "name": "Users",
+      "item": [
+        {
+          "name": "User-GetUser-Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/users/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "users", ""]
+            }
+          },
+          "response": []
         },
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3000/api/bookings/6a44ce85aa31b88d263fb648",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "bookings",
-            "6a44ce85aa31b88d263fb648"
-          ]
+        {
+          "name": "User-UpdateUser-profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Rohit Sharma Updated",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "male",
+                  "type": "text"
+                },
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "users", "profile"]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "booking-Cancel-refund",
-      "request": {
-        "auth": {
-          "type": "noauth"
+      "name": "Flights",
+      "item": [
+        {
+          "name": "admin-Create-flight",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <admin_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "flightNumber", "value": "AI-101", "type": "text" },
+                { "key": "airline", "value": "Air India", "type": "text" },
+                { "key": "departureCity", "value": "Delhi", "type": "text" },
+                { "key": "arrivalCity", "value": "Mumbai", "type": "text" },
+                { "key": "departureDate", "value": "2026-08-01", "type": "text" },
+                { "key": "arrivalDate", "value": "2026-08-01", "type": "text" },
+                { "key": "price", "value": "5000", "type": "text" },
+                { "key": "availableSeats", "value": "100", "type": "text" },
+                { "key": "flightClass", "value": "Economy", "type": "text" },
+                { "key": "image", "type": "file", "src": "" }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/flights",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"]
+            }
+          },
+          "response": []
         },
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2YTQ0Y2M3NmFhMzFiODhkMjYzZmI2NDQiLCJlbWFpbCI6Ikthc2hpc2hzaW5naEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI4OTM3NzIsImV4cCI6MTc4Mjg5NzM3Mn0.XR6oUXKWNiOLP0OM8hxeuzQtkG_ljLZpHt_mbvtTl-8",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3000/api/bookings/6a44ce85aa31b88d263fb648/cancel",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "bookings",
-            "6a44ce85aa31b88d263fb648",
-            "cancel"
-          ]
+        {
+          "name": "admin-Update-flight-byID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <admin_token>",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"price\": 4500,\r\n  \"availableSeats\": 120\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/flights/<flight_id>",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights", "<flight_id>"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin-Delete-flight-byID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <admin_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/flights/<flight_id>",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights", "<flight_id>"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User-GetAll-flights",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User-GetFlight-byID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights/<flight_id>",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights", "<flight_id>"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pagination-Page1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?page=1&limit=6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "6" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pagination-Page2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?page=2&limit=6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "page", "value": "2" },
+                { "key": "limit", "value": "6" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sort-Price-LowToHigh",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?sortBy=price&order=asc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "sortBy", "value": "price" },
+                { "key": "order", "value": "asc" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sort-Price-HighToLow",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?sortBy=price&order=desc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "sortBy", "value": "price" },
+                { "key": "order", "value": "desc" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sort-Seats-MostAvailable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?sortBy=availableSeats&order=desc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "sortBy", "value": "availableSeats" },
+                { "key": "order", "value": "desc" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sort-Date-Earliest",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?sortBy=departureDate&order=asc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "sortBy", "value": "departureDate" },
+                { "key": "order", "value": "asc" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-DepartureCity-lowercase",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?departureCity=delhi",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "departureCity", "value": "delhi" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-DepartureCity-uppercase",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?departureCity=DELHI",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "departureCity", "value": "DELHI" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-ArrivalCity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?arrivalCity=Mumbai",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "arrivalCity", "value": "Mumbai" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-FlightClass-Business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?flightClass=Business",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "flightClass", "value": "Business" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-FlightClass-Economy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?flightClass=Economy",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "flightClass", "value": "Economy" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-FlightClass-First",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?flightClass=First",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "flightClass", "value": "First" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter-DepartureDate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?departureDate=2026-08-01",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "departureDate", "value": "2026-08-01" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Combined-Filter-Sort-Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/flights?departureCity=delhi&sortBy=price&order=asc&page=1&limit=3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "flights"],
+              "query": [
+                { "key": "departureCity", "value": "delhi" },
+                { "key": "sortBy", "value": "price" },
+                { "key": "order", "value": "asc" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "3" }
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "bookings-Create-Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <user_token>",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"flightId\": \"<flight_id>\",\r\n  \"passengerList\": [\r\n    {\r\n      \"name\": \"Rohit Sharma\",\r\n      \"age\": 21,\r\n      \"gender\": \"male\"\r\n    },\r\n    {\r\n      \"name\": \"Priya Sharma\",\r\n      \"age\": 24,\r\n      \"gender\": \"female\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/bookings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "bookings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "booking-Get-By-ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/bookings/<booking_id>",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "bookings", "<booking_id>"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "booking-Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <user_token>",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"passengerList\": [\r\n    {\r\n      \"name\": \"Rohit Sharma Updated\",\r\n      \"age\": 22,\r\n      \"gender\": \"male\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/bookings/<booking_id>",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "bookings", "<booking_id>"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "booking-Cancel-refund-ADMIN",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <admin_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/bookings/<booking_id>/cancel",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "bookings", "<booking_id>", "cancel"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "booking-Cancel-USER-blocked-403",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <user_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/bookings/<booking_id>/cancel",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "bookings", "<booking_id>", "cancel"]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }

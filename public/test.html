@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Seat Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h2>Status: <span id="status" style="color: red">Not Connected</span></h2>
+    <br />
+    <input
+      id="flightId"
+      placeholder="Paste Flight ID here"
+      style="width: 300px; padding: 8px"
+    />
+    <button onclick="joinFlight()">Watch This Flight</button>
+    <br /><br />
+    <h2>Available Seats: <span id="seats" style="color: blue">--</span></h2>
+    <br />
+    <h3>Live Updates:</h3>
+    <div
+      id="log"
+      style="
+        background: #000;
+        color: #0f0;
+        padding: 10px;
+        height: 200px;
+        overflow-y: auto;
+        font-family: monospace;
+      "
+    ></div>
+
+    <script>
+      const socket = io();
+
+      function addLog(msg) {
+        const div = document.getElementById("log");
+        div.innerHTML += new Date().toLocaleTimeString() + " — " + msg + "<br>";
+        div.scrollTop = div.scrollHeight;
+      }
+
+      socket.on("connect", () => {
+        document.getElementById("status").textContent =
+          "Connected ✅ — " + socket.id;
+        document.getElementById("status").style.color = "green";
+        addLog("Connected: " + socket.id);
+      });
+
+      socket.on("seats-updated", (data) => {
+        document.getElementById("seats").textContent = data.availableSeats;
+        addLog("🔴 SEATS UPDATED to: " + data.availableSeats);
+      });
+
+      socket.on("disconnect", () => {
+        document.getElementById("status").textContent = "Disconnected ❌";
+        document.getElementById("status").style.color = "red";
+        addLog("Disconnected");
+      });
+
+      function joinFlight() {
+        const id = document.getElementById("flightId").value.trim();
+        if (!id) {
+          alert("Enter flight ID");
+          return;
+        }
+        socket.emit("join-flight", id);
+        addLog("Joined room: " + id);
+      }
+    </script>
+  </body>
+</html>

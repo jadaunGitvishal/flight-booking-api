@@ -1,7 +1,7 @@
 import BookingModel from "./booking.model.js";
 import { FlightModel } from "../flight/flight.repository.js";
 import { ApplicationError } from "../../error-handler/applicationError.js";
-import { io } from "../../../index.js";
+import { getIO } from "../../socket.js";
 import {
   sendBookingConfirmation,
   sendCancellationEmail,
@@ -14,14 +14,44 @@ const UserModel = mongoose.models.User || mongoose.model("User", userSchema);
 export default class BookingRepository {
   async create(data) {
     try {
-      // Find flight
+      // Validate passenger list before anything else
+      if (!data.flightId) {
+        throw new ApplicationError("Flight ID is required", 400);
+      }
+
+      if (
+        !data.passengerList ||
+        !Array.isArray(data.passengerList) ||
+        data.passengerList.length === 0
+      ) {
+        throw new ApplicationError(
+          "Passenger list is required and must have at least one passenger",
+          400,
+        );
+      }
+
+      // Validate each passenger has required fields
+      for (const passenger of data.passengerList) {
+        if (!passenger.name || !passenger.age || !passenger.gender) {
+          throw new ApplicationError(
+            "Each passenger must have name, age and gender",
+            400,
+          );
+        }
+      }
+
+      // Validate flightId is a valid MongoDB ObjectId format
+      if (!mongoose.Types.ObjectId.isValid(data.flightId)) {
+        throw new ApplicationError("Invalid flight ID format", 400);
+      }
+
       const flight = await FlightModel.findById(data.flightId);
 
       if (!flight) {
         throw new ApplicationError("Flight not found", 404);
       }
 
-      const passengerCount = data.passengerList?.length || 0;
+      const passengerCount = data.passengerList.length;
 
       if (flight.availableSeats < passengerCount) {
         throw new ApplicationError("Not enough seats available", 400);
@@ -30,6 +60,18 @@ export default class BookingRepository {
       // Reduce seats
       flight.availableSeats -= passengerCount;
       await flight.save();
+
+      // Emit real-time seat update
+      console.log("🔊 Emitting seats-updated, seats:", flight.availableSeats);
+      const io = getIO();
+      if (io) {
+        io.to(flight._id.toString()).emit("seats-updated", {
+          flightId: flight._id.toString(),
+          availableSeats: flight.availableSeats,
+        });
+      } else {
+        console.log("❌ io is null — socket not initialized");
+      }
 
       // Create booking
       const booking = new BookingModel({
@@ -41,27 +83,39 @@ export default class BookingRepository {
       });
 
       await booking.save();
+
       // Send confirmation email (non-blocking)
       const user = await UserModel.findById(data.userId).select("name email");
       sendBookingConfirmation({ booking, flight, user });
+
       return booking;
     } catch (err) {
       throw err;
     }
   }
 
-  // 2. Get Booking By Id
+  // Get Booking By Id
   async getBookingById(id) {
     try {
-      return await BookingModel.findById(id)
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new ApplicationError("Invalid booking ID format", 400);
+      }
+
+      const booking = await BookingModel.findById(id)
         .populate("flight")
         .populate("user");
+
+      if (!booking) {
+        throw new ApplicationError("Booking not found", 404);
+      }
+
+      return booking;
     } catch (err) {
       throw err;
     }
   }
 
-  // Update booking (passenger info or flight changes)
+  // Update booking
   async updateBooking(id, data) {
     try {
       const booking = await BookingModel.findByIdAndUpdate(id, data, {
@@ -78,16 +132,13 @@ export default class BookingRepository {
   // Cancel and Refund
   async cancelAndRefund(id) {
     try {
-      // 1. Find the booking
       const booking = await BookingModel.findById(id);
       if (!booking) return null;
 
-      // 2. Prevent processing if already cancelled
       if (booking.bookingStatus === "Cancelled") {
         throw new ApplicationError("Booking is already cancelled", 400);
       }
 
-      // 3. Return the seats back to the flight inventory safely
       const passengerCount = booking.passengerList
         ? booking.passengerList.length
         : 0;
@@ -100,15 +151,28 @@ export default class BookingRepository {
       totalSeatsToRefund = Math.max(0, Number(totalSeatsToRefund));
 
       if (totalSeatsToRefund > 0) {
-        await FlightModel.findByIdAndUpdate(booking.flight, {
-          $inc: { availableSeats: totalSeatsToRefund },
-        });
+        const updatedFlight = await FlightModel.findByIdAndUpdate(
+          booking.flight,
+          { $inc: { availableSeats: totalSeatsToRefund } },
+          { new: true },
+        );
+
+        // Emit real-time seat restore
+        console.log(
+          "🔊 Emitting seats-updated after cancel, seats:",
+          updatedFlight?.availableSeats,
+        );
+        const io = getIO();
+        if (io && updatedFlight) {
+          io.to(updatedFlight._id.toString()).emit("seats-updated", {
+            flightId: updatedFlight._id.toString(),
+            availableSeats: updatedFlight.availableSeats,
+          });
+        }
       }
 
-      // 4. Update booking status to Cancelled
       booking.bookingStatus = "Cancelled";
 
-      // CRITICAL FIX: Explicitly populate totalPassengers so Mongoose validation passes
       if (
         booking.totalPassengers === undefined ||
         booking.totalPassengers === null
@@ -116,9 +180,8 @@ export default class BookingRepository {
         booking.totalPassengers = totalSeatsToRefund;
       }
 
-      await booking.save(); // Line 97 won't fail anymore!
+      await booking.save();
 
-      // 5. Simulate refund process
       const refundDetails = {
         bookingId: booking._id,
         refundStatus: "Processed",
@@ -126,10 +189,10 @@ export default class BookingRepository {
         processedAt: new Date(),
       };
 
-      // Send cancellation email (non-blocking)
       const flight = await FlightModel.findById(booking.flight);
       const user = await UserModel.findById(booking.user).select("name email");
       sendCancellationEmail({ booking, flight, user, refundDetails });
+
       return { booking, refundDetails };
     } catch (err) {
       throw err;

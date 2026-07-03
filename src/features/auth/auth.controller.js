@@ -31,6 +31,20 @@ export default class AuthController {
     const { name, email, password, role, profilePicture, createdAt, gender } =
       req.body;
     try {
+      // Input validation before bcrypt runs
+      if (!name || !email || !password || !gender) {
+        return res.status(400).json({
+          success: false,
+          message: "Name, email, password and gender are required fields.",
+        });
+      }
+
+      if (password.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: "Password must be at least 6 characters.",
+        });
+      }
       const hashedPassword = await bcrypt.hash(password, 12);
       const user = new UserModel(
         name,
