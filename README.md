@@ -371,22 +371,108 @@ This separation ensures:
 
 ---
 
-## 🔌 Real-time Features (Socket.IO)
+## 🔌 Real-time Seat Availability — Socket.IO
 
-The server uses Socket.IO to push live seat availability updates to connected clients.
+The server uses Socket.IO to push live seat availability updates to all connected clients instantly — no page refresh needed.
+
+### How it works
+
+When a booking is created or cancelled, the server emits a `seats-updated` event to all clients watching that specific flight room. Clients receive the new seat count in real time.
 
 ### Events
 
-| Event           | Direction       | Payload                        | Description                                         |
-| --------------- | --------------- | ------------------------------ | --------------------------------------------------- |
-| `join-flight`   | Client → Server | `flightId`                     | Subscribe to seat updates for a flight              |
-| `leave-flight`  | Client → Server | `flightId`                     | Unsubscribe from a flight room                      |
-| `seats-updated` | Server → Client | `{ flightId, availableSeats }` | Emitted when seats change (booking or cancellation) |
+| Event           | Direction       | Payload                        | Description                                          |
+| --------------- | --------------- | ------------------------------ | ---------------------------------------------------- |
+| `join-flight`   | Client → Server | `flightId`                     | Subscribe to seat updates for a specific flight      |
+| `leave-flight`  | Client → Server | `flightId`                     | Unsubscribe from a flight room                       |
+| `seats-updated` | Server → Client | `{ flightId, availableSeats }` | Emitted when seats change on booking or cancellation |
 
-### When updates are emitted
+### When `seats-updated` is emitted
 
-- After a successful **booking** — available seats decrease
-- After a successful **cancellation** — available seats restore
+- ✅ After a successful **booking** — available seats decrease by passenger count
+- ✅ After a successful **cancellation** — available seats restore back to original
+
+### How to Test
+
+**Step 1 — Start the server**
+
+```
+npm run dev
+```
+
+**Step 2 — Open test page in two browser tabs**
+
+```
+Tab 1 → http://localhost:3000/test.html
+Tab 2 → http://localhost:3000/test.html
+```
+
+Both tabs should show:
+
+```
+Status: Connected ✅ — <socket_id>
+```
+
+**Step 3 — Get a flight ID**
+
+```
+GET http://localhost:3000/api/flights
+```
+
+Copy any `_id` from the response.
+
+**Step 4 — Join the flight room in both tabs**
+
+```
+Paste the flight ID into the input box
+Click "Watch This Flight"
+```
+
+Both tabs show:
+
+```
+Joined room: <flight_id>
+```
+
+**Step 5 — Make a booking via Postman**
+
+```json
+POST http://localhost:3000/api/bookings
+Authorization: Bearer <user_token>
+Content-Type: application/json
+
+{
+  "flightId": "<flight_id>",
+  "passengerList": [
+    { "name": "Vishal", "age": 25, "gender": "male" }
+  ]
+}
+```
+
+**Step 6 — Watch both tabs update instantly**
+
+Both tabs show without any page refresh:
+
+```
+🔴 SEATS UPDATED to: 99
+Available Seats: 99
+```
+
+**Step 7 — Cancel booking via Postman (admin token)**
+
+```
+PUT http://localhost:3000/api/bookings/<booking_id>/cancel
+Authorization: Bearer <admin_token>
+```
+
+Both tabs instantly show:
+
+```
+🔴 SEATS UPDATED to: 100
+Available Seats: 100
+```
+
+Seats restored in real time ✅
 
 ---
 
